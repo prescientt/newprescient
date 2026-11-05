@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GEX Sniper | Gamma Exposure Heatmaps &amp; Options Flow Analysis · Prescient+</title>
+  <meta name="description" content="GEX Sniper: advanced options flow analysis with gamma exposure heatmaps, AI-powered insights, and real-time market data visualization. Recommended by Prescient+." />
+  <link rel="canonical" href="https://prescientrades.com/gex-sniper.html" />
+  <meta name="theme-color" content="#050505" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="GEX Sniper | See Where Dealers Are Forced to Hedge" />
+  <meta property="og:description" content="Gamma exposure heatmaps, AI-powered insights, and real-time options flow." />
+  <meta property="og:image" content="https://prescientrades.com/og-image.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__mark"><div class="loader__word">GEX Sniper — loading</div><div class="loader__bar"><i></i></div></div>
+  </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"></div><div class="cursor-dot" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="logo" aria-label="Prescient+ home">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="1" y="1" width="22" height="22" stroke="#f0b90b" stroke-width="2"/><path d="M8 18V6h5a3.5 3.5 0 0 1 0 7H8" stroke="#f5f5f5" stroke-width="2.2" stroke-linecap="square"/></svg>
+        <span>Prescient<b>+</b></span>
+      </a>
+      <nav class="nav__links" id="navLinks" aria-label="Main">
+        <a href="index.html#edge">The Edge</a>
+        <a href="index.html#results">Results</a>
+        <a href="index.html#memberships">Memberships</a>
+        <a href="gex-sniper.html" class="is-active">GEX Sniper</a>
+        <a href="https://discord.gg/4gqnwCjpJ" target="_blank" rel="noopener">Discord</a>
+        <a href="https://gexsniper.com/" class="btn btn--gold btn--sm magnetic" target="_blank" rel="noopener">Get GEX Sniper</a>
+      </nav>
+      <button class="nav__burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="gx-hero has-bg bg-gex">
+      <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="hero__vignette" aria-hidden="true"></div>
+      <div class="container gx-hero__inner">
+        <div>
+          <p class="eyebrow hero__fade">Options Flow Analysis</p>
+          <h1 class="hero__title"><span class="line"><span>GEX</span></span><span class="line"><span class="gold-text">Sniper</span></span></h1>
+          <p class="hero__fade d1">See where dealers are forced to hedge before price gets there. Gamma exposure heatmaps, AI-powered insights, and real-time market data, built for traders who read the mechanics.</p>
+          <div class="hero__ctas hero__fade d2 gx-ctas">
+            <a href="https://gexsniper.com/" class="btn btn--gold magnetic" target="_blank" rel="noopener">Launch GEX Sniper <span class="arrow">→</span></a>
+            <a href="#profile" class="btn btn--line magnetic">Try the Demo</a>
+          </div>
+        </div>
+        <div class="gx-scope hero__fade d2" aria-hidden="true" id="scope">
+          <svg viewBox="0 0 500 500" fill="none">
+            <defs><radialGradient id="sg"><stop offset="0" stop-color="#f0b90b" stop-opacity=".22"/><stop offset="1" stop-color="#f0b90b" stop-opacity="0"/></radialGradient></defs>
+            <circle cx="250" cy="250" r="240" fill="url(#sg)"/>
+            <g class="rot" stroke="#f0b90b" stroke-opacity=".5">
+              <circle cx="250" cy="250" r="220" stroke-dasharray="2 10"/>
+              <circle cx="250" cy="250" r="190" stroke-opacity=".25"/>
+            </g>
+            <g class="rot2" stroke="#f5f5f5" stroke-opacity=".6">
+              <path d="M250 70 A180 180 0 0 1 430 250" stroke-width="2"/>
+              <path d="M250 430 A180 180 0 0 1 70 250" stroke-width="2"/>
+            </g>
+            <circle cx="250" cy="250" r="120" stroke="#f0b90b" stroke-opacity=".4"/>
+            <circle cx="250" cy="250" r="60" stroke="#f0b90b" stroke-opacity=".7"/>
+            <path d="M250 40v120M250 340v120M40 250h120M340 250h120" stroke="#f5f5f5" stroke-width="1.2"/>
+            <g id="scopeDot"><circle cx="250" cy="250" r="6" fill="#f5f5f5"/><circle cx="250" cy="250" r="16" stroke="#f5f5f5" stroke-opacity=".6"/></g>
+            <text x="268" y="236" fill="#f0b90b" font-family="JetBrains Mono" font-size="11" letter-spacing="2">CALL WALL</text>
+            <text x="120" y="330" fill="#ff4d4d" font-family="JetBrains Mono" font-size="11" letter-spacing="2">PUT WALL</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" id="marquee">
+        <span>Gamma Exposure <b class="up">GEX</b></span>
+        <span>Vanna Exposure <b class="up">VEX</b></span>
+        <span>Implied Volatility <b class="up">IV</b></span>
+        <span>Options Flow <b class="up">Live</b></span>
+        <span>AI Insights <b class="up">On</b></span>
+        <span>Heatmaps <b class="up">Strike × Expiry</b></span>
+      </div>
+    </div>
+
+    <section class="manifesto">
+      <div class="container">
+        <p class="manifesto__text" data-words>Price doesn&rsquo;t move in a vacuum. When dealers are short gamma they <span class="g">chase moves</span>. When they are long gamma they <span class="g">pin price</span>. GEX Sniper shows you which one is happening right now.</p>
+      </div>
+    </section>
+
+    <section class="section section--ink">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">What&rsquo;s Inside</p>
+          <h2>Built for traders who<br /><span class="gold-text">read the mechanics.</span></h2>
+        </div>
+        <div class="features">
+          <article class="feature reveal"><span class="feature__k">GEX</span><h3>Gamma Exposure Heatmaps</h3><p>Net dealer gamma across strikes and expiries, so you can spot walls, flips, and magnets at a glance.</p></article>
+          <article class="feature reveal" style="--d:.08s"><span class="feature__k">VEX</span><h3>Vanna Exposure</h3><p>See how shifts in volatility force dealers to rebalance, and where those flows support or pressure price.</p></article>
+          <article class="feature reveal" style="--d:.16s"><span class="feature__k">IV</span><h3>Implied Volatility</h3><p>Track the volatility surface alongside positioning to understand when moves are cheap and when they are crowded.</p></article>
+          <article class="feature reveal"><span class="feature__k">FLOW</span><h3>Options Flow Analysis</h3><p>Follow where size is actually landing instead of guessing from price alone.</p></article>
+          <article class="feature reveal" style="--d:.08s"><span class="feature__k">AI</span><h3>AI-Powered Insights</h3><p>Plain-language reads on the current positioning so you get the &ldquo;so what&rdquo; without the spreadsheet.</p></article>
+          <article class="feature reveal" style="--d:.16s"><span class="feature__k">LIVE</span><h3>Real-Time Visualization</h3><p>Market data rendered as clean, fast visuals that keep up with the session.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="profile">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <p class="eyebrow">Interactive Demo</p>
+          <h2>Move the price. <span class="gold-text">Watch the regime flip.</span></h2>
+          <p class="section__sub">Drag across the chart (or use the slider) to move spot price through a sample gamma profile.</p>
+        </div>
+        <div class="profile reveal">
+          <div class="profile__top">
+            <div class="profile__stats">
+              <div class="profile__stat"><small>Spot</small><b id="pSpot">5,900</b></div>
+              <div class="profile__stat"><small>Net GEX</small><b id="pGex">+$1.8B</b></div>
+              <div class="profile__stat"><small>Regime</small><b id="pRegime">Long gamma · pinning</b></div>
+            </div>
+            <span class="heat__live">Demo data</span>
+          </div>
+          <canvas id="gexProfile" aria-label="Sample gamma exposure profile by strike"></canvas>
+          <input class="range" id="spotRange" type="range" min="0" max="1000" value="560" aria-label="Spot price" />
+          <p class="profile__hint">Illustrative model for education only. Not live data and not a trade signal. Real-time data lives at gexsniper.com.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ink">
+      <div class="container gex-teaser">
+        <div class="gex-teaser__copy reveal">
+          <p class="eyebrow">Heatmap</p>
+          <h2>Every strike.<br /><span class="gold-text">Every expiry.</span></h2>
+          <p>Bright gold is where dealers hold heavy long gamma and tend to dampen moves. Deep red is short gamma, where moves can accelerate. Hover any cell to read it.</p>
+        </div>
+        <div class="reveal" style="--d:.15s">
+          <div class="heat" data-heatmap>
+            <div class="heat__head"><span>Net GEX · Strike × Expiry</span><span class="heat__live">Demo</span></div>
+            <div class="heat__grid"></div>
+            <div class="heat__legend"><span>Short γ</span><i></i><span>Long γ</span></div>
+            <div class="heat__tip"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">How Traders Use It</p>
+          <h2>From levels to <span class="gold-text">a plan.</span></h2>
+        </div>
+        <ol class="steps3">
+          <li class="reveal"><h3>Map the walls</h3><p>Find the call wall, put wall, and gamma flip before the open.</p></li>
+          <li class="reveal" style="--d:.1s"><h3>Read the regime</h3><p>Long gamma favors mean reversion. Short gamma favors momentum. Know which game you are playing.</p></li>
+          <li class="reveal" style="--d:.2s"><h3>Execute with context</h3><p>Pair the levels with Prescient+ live calls and commentary to turn data into decisions.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="cta">
+            <div class="container reveal">
+        <p class="eyebrow">Take Aim</p>
+        <h2>Stop guessing.<br /><span class="gold-text">Start sniping levels.</span></h2>
+        <p>Get gamma exposure heatmaps, AI insights, and real-time flow in one place.</p>
+        <div class="hero__ctas">
+          <a href="https://gexsniper.com/" class="btn btn--gold magnetic" target="_blank" rel="noopener">Get GEX Sniper <span class="arrow">→</span></a>
+          <a href="index.html#memberships" class="btn btn--line magnetic">Prescient+ Memberships</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="logo"><span>Prescient<b>+</b></span></a>
+          <p>Engineered market perspective for options, futures, and mentorship.</p>
+        </div>
+        <div class="footer__cols">
+          <div><h4>Explore</h4><a href="index.html">Home</a><a href="index.html#memberships">Memberships</a><a href="index.html#mentorship">Mentorship</a><a href="https://gexsniper.com/" target="_blank" rel="noopener">gexsniper.com</a></div>
+          <div><h4>Connect</h4><a href="https://discord.gg/4gqnwCjpJ" target="_blank" rel="noopener">Discord</a><a href="https://instagram.com/prescientrades" target="_blank" rel="noopener">Instagram</a></div>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <p>Visualizations on this page use sample data for illustration. Trading involves substantial risk of loss. Nothing here is financial advice.</p>
+        <p>© <span id="year">2026</span> Prescient+ · prescientrades.com</p>
+      </div>
+      <div class="footer__giant" aria-hidden="true">GEX Sniper</div>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

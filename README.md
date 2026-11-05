@@ -4,19 +4,24 @@ Static marketing site for the Prescient+ trading community. No build step, no fr
 
 ## Files
 
-- `index.html` — the entire site (content, meta tags, structured data)
-- `styles.css` — design system and layout
-- `main.js` — nav, scroll animations, counters, FAQ accordion
+- `index.html` — home page (hero, edge, memberships, mentorship, GEX Sniper teaser, FAQ)
+- `gex-sniper.html` — GEX Sniper promo page with interactive gamma demo
+- `styles.css` — minimal, sharp black & gold design system
+- `img/` — member result screenshots (cropped, names removed)
+- `main.js` — loader, cursor, magnetic buttons, tilt cards, particle hero, scroll-lit text, heatmap, GEX profile demo
 - `og-image.png` — social share card (Open Graph / Twitter)
 - `favicon.svg` — browser icon
 - `robots.txt` / `sitemap.xml` — search engine files
 
 ## Checkout links
 
-Both plans link directly to hosted checkouts (edit in `index.html` if they change):
+All plans link directly to hosted checkouts (edit in `index.html` if they change):
 
-- **Legacy Tier — $125/mo (Whop):** `https://whop.com/checkout/2qAdq5HfPRqsM71eut-h1IK-fl2T-V1lI-vc7xCAyaMrWP/`
+- **Legacy — $125/mo (Whop):** `https://whop.com/checkout/plan_PALPck8TJu5V7/`
+- **Vanguard — $225/mo (Whop):** `https://whop.com/prescientrades/vanguard-membership/`
 - **1-on-1 Mentorship — $3,500 (Stripe):** `https://buy.stripe.com/dRmdR8awraxw7XsfFi4c80e`
+- **Discord:** `https://discord.gg/4gqnwCjpJ`
+- **GEX Sniper:** `https://gexsniper.com/`
 
 ## Preview locally
 
@@ -37,6 +42,6 @@ After deploying, submit `https://prescientrades.com/sitemap.xml` in Google Searc
 
 ## Updating content
 
-- **Prices / plan features:** search for `price-card` in `index.html`. Also update the matching JSON-LD (`application/ld+json`) blocks and the FAQ answers so search results stay accurate.
+- **Prices / plan features:** search for `class="tier` in `index.html`. Also update the matching JSON-LD (`application/ld+json`) blocks and the FAQ answers so search results stay accurate.
 - **Social links:** Discord and Instagram URLs appear in the nav, steps, CTA band, and footer.
 - **Contact email:** `mailto:` links in the mentorship section and footer.
