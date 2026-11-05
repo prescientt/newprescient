@@ -21,6 +21,7 @@
   /* ---------- nav ---------- */
   const nav = $('#nav'), burger = $('#navBurger'), links = $('#navLinks');
   let lastY = 0;
+  const bgs = $$('.has-bg');
   const onScroll = () => {
     const sy = scrollY;
     nav.classList.toggle('is-scrolled', sy > 40);
@@ -29,6 +30,7 @@
     const max = document.body.scrollHeight - innerHeight;
     $('#progress').style.transform = `scaleX(${max > 0 ? sy / max : 0})`;
     litWords();
+    if (!reduce) bgs.forEach(el => { const r = el.getBoundingClientRect(); if (r.bottom > 0 && r.top < innerHeight) el.style.setProperty('--par', ((r.top + r.height / 2 - innerHeight / 2) * -0.12).toFixed(1) + 'px'); });
   };
   addEventListener('scroll', onScroll, { passive: true });
   burger.addEventListener('click', () => {

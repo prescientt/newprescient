@@ -336,3 +336,25 @@ p { margin: 0 0 1em; }
   .reveal, .hero__fade { opacity: 1; transform: none; }
   .hero__title .line > span { transform: none; }
 }
+
+/* ---------- photographic backgrounds ---------- */
+.has-bg { position: relative; isolation: isolate; }
+.has-bg::before {
+  content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background: var(--bg-img) center / cover no-repeat;
+  opacity: var(--bg-op, .35);
+  transform: translateY(var(--par, 0px)) scale(1.08);
+  will-change: transform;
+}
+.has-bg::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, #000 0%, rgba(0,0,0,.55) 22%, rgba(0,0,0,.55) 78%, #000 100%);
+}
+.hero.has-bg::before { --bg-op: .55; }
+.hero.has-bg::after { background: linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.6) 45%, rgba(0,0,0,.25) 100%), linear-gradient(180deg, rgba(0,0,0,0) 55%, #000 100%); }
+.hero .hero__canvas, .gx-hero .hero__canvas { z-index: 0; }
+.hero__content, .hero__meta { z-index: 2; }
+.bg-hero { --bg-img: url("img/bg-hero.jpg"); }
+.bg-chart { --bg-img: url("img/bg-chart.jpg"); --bg-op: .22; }
+.bg-mentor { --bg-img: url("img/bg-mentor.jpg"); --bg-op: .3; }
+.bg-gex { --bg-img: url("img/bg-gex.jpg"); --bg-op: .4; }
