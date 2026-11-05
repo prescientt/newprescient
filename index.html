@@ -24,7 +24,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 
   <script type="application/ld+json">
@@ -53,23 +53,20 @@
 </head>
 <body>
   <div class="loader" id="loader" aria-hidden="true">
-    <div class="loader__mark">
-      <svg viewBox="0 0 32 32" fill="none"><path d="M16 4 L28 16 L16 28 L4 16 Z" stroke="#d4af5f" stroke-width="1"/><path d="M12.5 21 V11 h4.5 a3.2 3.2 0 0 1 0 6.4 h-4.5" stroke="#f3dc9a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div class="loader__word">Prescient</div>
-    </div>
+    <div class="loader__mark"><div class="loader__word">Prescient+ — loading</div><div class="loader__bar"><i></i></div></div>
   </div>
-  <div class="grain" aria-hidden="true"></div>
   <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="cursor" aria-hidden="true"></div><div class="cursor-dot" aria-hidden="true"></div>
 
   <header class="nav" id="nav">
     <div class="container nav__inner">
       <a href="#top" class="logo" aria-label="Prescient+ home">
-        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3 L29 16 L16 29 L3 16 Z" stroke="#d4af5f" stroke-width="1.3"/><path d="M12.5 21 V11 h4.5 a3.2 3.2 0 0 1 0 6.4 h-4.5" stroke="#f3dc9a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="1" y="1" width="22" height="22" stroke="#f0b90b" stroke-width="2"/><path d="M8 18V6h5a3.5 3.5 0 0 1 0 7H8" stroke="#f5f5f5" stroke-width="2.2" stroke-linecap="square"/></svg>
         <span>Prescient<b>+</b></span>
       </a>
       <nav class="nav__links" id="navLinks" aria-label="Main">
         <a href="#edge">The Edge</a>
+        <a href="#results">Results</a>
         <a href="#memberships">Memberships</a>
         <a href="#mentorship">Mentorship</a>
         <a href="gex-sniper.html">GEX Sniper</a>
@@ -85,21 +82,22 @@
     <!-- HERO -->
     <section class="hero">
       <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
-      <div class="hero__halo" aria-hidden="true"></div>
       <div class="hero__vignette" aria-hidden="true"></div>
+      <div class="hero__meta hero__fade"><div class="container"><span>Prescient+ / Trading Community</span><span>Options · Futures · GEX</span><span>NY <b id="clock">--:--:--</b></span></div></div>
       <div class="container hero__content">
         <p class="eyebrow hero__fade">Engineered Trading Community</p>
         <h1 class="hero__title">
           <span class="line"><span>Markets aren&rsquo;t random.</span></span>
-          <span class="line"><span class="gold-text"><em>They&rsquo;re engineered.</em></span></span>
+          <span class="line"><span class="gold-text">They&rsquo;re engineered.</span></span>
         </h1>
-        <p class="hero__sub hero__fade d1">Options &amp; futures trade ideas, live calls, and private mentorship built around <strong>dealer positioning, gamma pressure, and liquidity</strong>, so you understand why price moves instead of chasing it.</p>
-        <div class="hero__ctas hero__fade d2">
-          <a href="#memberships" class="btn btn--gold magnetic">View Memberships <span class="arrow">→</span></a>
-          <a href="https://discord.gg/4gqnwCjpJ" class="btn btn--line magnetic" target="_blank" rel="noopener">Enter the Discord</a>
+        <div class="hero__row">
+          <p class="hero__sub hero__fade d1">Options &amp; futures trade ideas, live calls, and 1-on-1 mentorship built around <strong>dealer positioning, gamma, and liquidity</strong>. Understand why price moves instead of chasing it.</p>
+          <div class="hero__ctas hero__fade d2">
+            <a href="#memberships" class="btn btn--gold magnetic">View Memberships <span class="arrow">→</span></a>
+            <a href="#results" class="btn btn--line magnetic">See Results</a>
+          </div>
         </div>
       </div>
-      <div class="hero__scroll hero__fade d3" aria-hidden="true">Scroll<i></i></div>
     </section>
 
     <!-- MARQUEE -->
@@ -123,18 +121,75 @@
       </div>
     </section>
 
+    <!-- RESULTS -->
+    <section class="section" id="results">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">Member Results</p>
+          <h2>Receipts,<br /><span class="gold-text">not promises.</span></h2>
+          <p class="section__sub">Straight from the Prescient+ Discord. Real screenshots and messages members posted after following the calls.</p>
+        </div>
+        <div class="stats reveal">
+          <div class="stat"><b data-count="80" data-suffix="%">0%</b><span>Win rate · 20 / 25 swing calls</span></div>
+          <div class="stat"><b data-count="275" data-prefix="+" data-suffix="%">+0%</b><span>Member account · 3 months</span></div>
+          <div class="stat"><b data-count="202" data-prefix="+" data-suffix="%">+0%</b><span>Member account · 3 months</span></div>
+          <div class="stat"><b data-count="233" data-prefix="+$" data-suffix="K">+$0K</b><span>Member gain · 1 week</span></div>
+        </div>
+        <div class="proof">
+          <figure class="proof__card reveal">
+            <div class="proof__img"><img src="img/proof-233k.png" alt="Brokerage screenshot showing +$233,610.16 (23.13%) past week" loading="lazy" width="1095" height="155" /></div>
+            <div class="proof__body">
+              <div class="proof__big">+$233,610 in a week</div>
+              <p class="proof__q">&ldquo;Thankful for the guidance. Couldn&rsquo;t have done it without you fr.&rdquo;</p>
+              <div class="proof__meta"><span>Discord member</span><b>Sep 4, 2026</b></div>
+            </div>
+          </figure>
+          <figure class="proof__card proof__card--quote reveal" style="--d:.08s">
+            <div class="proof__body">
+              <div class="proof__big">20 / 25 · 80% win rate</div>
+              <p class="proof__q">The best of the best algos don&rsquo;t even get 80%. The best analysts in the world hope for a 75% run. This Discord is a money printer. Seriously, sub up.</p>
+              <div class="proof__meta"><span>Discord member · swing calls</span><b>Oct 30, 2026</b></div>
+            </div>
+          </figure>
+          <figure class="proof__card reveal" style="--d:.16s">
+            <div class="proof__img"><img src="img/proof-202.png" alt="Brokerage screenshot showing +202.05% over the past 3 months" loading="lazy" width="676" height="694" /></div>
+            <div class="proof__body">
+              <div class="proof__big">+202.05% in 3 months</div>
+              <p class="proof__q">&ldquo;With just following the call outs I&rsquo;ve made wife changing money.&rdquo;</p>
+              <div class="proof__meta"><span>Discord member</span><b>Sep 9, 2026</b></div>
+            </div>
+          </figure>
+          <figure class="proof__card reveal">
+            <div class="proof__img"><img src="img/proof-275.png" alt="Brokerage screenshot showing +275.85% over the past 3 months" loading="lazy" width="321" height="408" /></div>
+            <div class="proof__body">
+              <div class="proof__big">+275.85% in 3 months</div>
+              <p class="proof__q">&ldquo;GG.&rdquo;</p>
+              <div class="proof__meta"><span>Discord member</span><b>Sep 17, 2026</b></div>
+            </div>
+          </figure>
+          <figure class="proof__card proof__card--quote reveal" style="--d:.08s">
+            <div class="proof__body">
+              <p class="proof__q">Motivation&hellip; can&rsquo;t wait until I have that kind of testimony.</p>
+              <div class="proof__meta"><span>New member</span><b>Sep 4, 2026</b></div>
+            </div>
+          </figure>
+        </div>
+        <p class="proof__note">Screenshots and messages shared by members in the Prescient+ Discord. Names hidden for privacy. Individual results are not typical and not guaranteed. Trading involves substantial risk of loss.</p>
+      </div>
+    </section>
+
     <!-- EDGE -->
     <section class="section section--ink" id="edge">
       <div class="container">
         <div class="section__head reveal">
           <p class="eyebrow">The Edge</p>
-          <h2>Trade the mechanics.<br /><em class="gold-text">Not the noise.</em></h2>
+          <h2>Trade the mechanics.<br /><span class="gold-text">Not the noise.</span></h2>
           <p class="section__sub">Everything inside Prescient+ is built around the structural forces professionals watch every session.</p>
         </div>
         <div class="edge-grid">
           <article class="edge-card reveal" style="--d:.0s">
             <span class="edge-card__num">01</span>
-            <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="2.5" fill="#d4af5f"/><path d="M24 2v8M24 38v8M2 24h8M38 24h8"/></svg>
+            <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="2.5" fill="#f0b90b"/><path d="M24 2v8M24 38v8M2 24h8M38 24h8"/></svg>
             <h3>Real-Time Trade Ideas</h3>
             <p>Options and futures setups built for fast sessions, with the reasoning attached. Never a blind alert.</p>
           </article>
@@ -177,7 +232,7 @@
       <div class="container">
         <div class="section__head section__head--center reveal">
           <p class="eyebrow">Memberships</p>
-          <h2>Choose your <em class="gold-text">level of access</em></h2>
+          <h2>Choose your <span class="gold-text">level of access</span></h2>
           <p class="section__sub">Three ways in. One standard: trade with the mechanics in mind.</p>
         </div>
         <div class="tiers">
@@ -246,7 +301,7 @@
       <div class="container mentor">
         <div class="mentor__copy reveal">
           <p class="eyebrow">Elite Mentorship</p>
-          <h2>Go beyond alerts.<br /><em class="gold-text">Learn the machine.</em></h2>
+          <h2>Go beyond alerts.<br /><span class="gold-text">Learn the machine.</span></h2>
           <p>Signals tell you <em>what</em>. Mentorship teaches you <em>why</em>. This is for traders who want to internalize the same framework and decision-making model behind every Prescient+ setup.</p>
           <ul class="pillars">
             <li><span>01</span><div><strong>Accelerated learning</strong><em>Compress years of trial and error into structured guidance.</em></div></li>
@@ -298,21 +353,6 @@
       </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="section section--ink" id="voices">
-      <div class="container">
-        <div class="section__head section__head--center reveal">
-          <p class="eyebrow">Community Voices</p>
-          <h2>What traders are saying</h2>
-        </div>
-        <div class="quotes">
-          <blockquote class="quote reveal"><p>It feels more like entering a serious trading framework than joining another Discord for alerts.</p><footer>Structure-Driven Trader</footer></blockquote>
-          <blockquote class="quote reveal" style="--d:.1s"><p>Built around gamma, liquidity, and real market behavior instead of random hype. That&rsquo;s the difference.</p><footer>Legacy Member</footer></blockquote>
-          <blockquote class="quote reveal" style="--d:.2s"><p>The mentorship gives you a path to understand the thinking behind the trades, not just copy them.</p><footer>Mentorship Student</footer></blockquote>
-        </div>
-      </div>
-    </section>
-
     <!-- FAQ -->
     <section class="section" id="faq">
       <div class="container container--narrow">
@@ -332,10 +372,9 @@
 
     <!-- CTA -->
     <section class="cta" id="join">
-      <div class="cta__rings" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="container reveal">
+            <div class="container reveal">
         <p class="eyebrow">Your Move</p>
-        <h2>See the market the way<br /><em class="gold-text">it&rsquo;s actually moved.</em></h2>
+        <h2>See the market the way<br /><span class="gold-text">it&rsquo;s actually moved.</span></h2>
         <p>Join a room built for traders who want to understand why price moves, not chase it after it happens.</p>
         <div class="hero__ctas">
           <a href="#memberships" class="btn btn--gold magnetic">Choose a Membership <span class="arrow">→</span></a>
@@ -354,7 +393,7 @@
           <p>Engineered market perspective for options, futures, and mentorship.</p>
         </div>
         <div class="footer__cols">
-          <div><h4>Explore</h4><a href="#edge">The Edge</a><a href="#memberships">Memberships</a><a href="#mentorship">Mentorship</a><a href="gex-sniper.html">GEX Sniper</a></div>
+          <div><h4>Explore</h4><a href="#edge">The Edge</a><a href="#results">Results</a><a href="#memberships">Memberships</a><a href="#mentorship">Mentorship</a><a href="gex-sniper.html">GEX Sniper</a></div>
           <div><h4>Join</h4><a href="https://whop.com/checkout/plan_PALPck8TJu5V7/" target="_blank" rel="noopener">Legacy</a><a href="https://whop.com/prescientrades/vanguard-membership/" target="_blank" rel="noopener">Vanguard</a><a href="https://buy.stripe.com/dRmdR8awraxw7XsfFi4c80e" target="_blank" rel="noopener">Mentorship</a></div>
           <div><h4>Connect</h4><a href="https://discord.gg/4gqnwCjpJ" target="_blank" rel="noopener">Discord</a><a href="https://instagram.com/prescientrades" target="_blank" rel="noopener">Instagram</a><a href="mailto:xanderamusic@gmail.com?subject=Prescient%2B%20Inquiry">Email</a></div>
         </div>

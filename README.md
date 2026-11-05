@@ -6,7 +6,8 @@ Static marketing site for the Prescient+ trading community. No build step, no fr
 
 - `index.html` — home page (hero, edge, memberships, mentorship, GEX Sniper teaser, FAQ)
 - `gex-sniper.html` — GEX Sniper promo page with interactive gamma demo
-- `styles.css` — black & gold design system and layout
+- `styles.css` — minimal, sharp black & gold design system
+- `img/` — member result screenshots (cropped, names removed)
 - `main.js` — loader, cursor, magnetic buttons, tilt cards, particle hero, scroll-lit text, heatmap, GEX profile demo
 - `og-image.png` — social share card (Open Graph / Twitter)
 - `favicon.svg` — browser icon

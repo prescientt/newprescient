@@ -118,56 +118,85 @@
   /* ---------- marquee: duplicate for seamless loop ---------- */
   const mq = $('#marquee'); if (mq) mq.innerHTML += mq.innerHTML;
 
-  /* ---------- hero canvas: gold dust + flowing gamma lines ---------- */
+  /* ---------- hero canvas: reactive dot grid + live price trace ---------- */
   const cv = $('#heroCanvas');
   if (cv) {
     const ctx = cv.getContext('2d');
-    let W, H, dpr, parts = [], mouse = { x: -9999, y: -9999 }, t = 0;
+    let W, H, dpr, mouse = { x: -9999, y: -9999 }, t = 0, trace = [];
+    const GAP = 26;
     const resize = () => {
       dpr = Math.min(devicePixelRatio || 1, 2);
       W = cv.offsetWidth; H = cv.offsetHeight;
       cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.min(140, Math.round(W * H / 11000));
-      parts = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .25, vy: -Math.random() * .3 - .05, r: Math.random() * 1.6 + .3, a: Math.random() * .6 + .2 }));
+      trace = []; let v = H * .55;
+      for (let x = 0; x <= W + 8; x += 8) { v += (Math.random() - .47) * 9; v = Math.max(H * .25, Math.min(H * .7, v)); trace.push(v); }
     };
     resize(); addEventListener('resize', resize);
-    cv.parentElement.addEventListener('mousemove', e => { const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
-    cv.parentElement.addEventListener('mouseleave', () => { mouse.x = mouse.y = -9999; });
-
+    const host = cv.parentElement;
+    host.addEventListener('mousemove', e => { const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+    host.addEventListener('mouseleave', () => { mouse.x = mouse.y = -9999; });
     let visible = true;
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(cv);
 
     const draw = () => {
       ctx.clearRect(0, 0, W, H);
-      // flowing curves
-      const lines = 9;
-      for (let i = 0; i < lines; i++) {
-        const base = H * (.3 + i * .055);
-        ctx.beginPath();
-        for (let x = 0; x <= W; x += 14) {
-          const dx = x - mouse.x, bend = Math.exp(-(dx * dx) / 40000) * (mouse.y > -1 ? (mouse.y - base) * .25 : 0);
-          const yv = base + Math.sin(x * .0042 + t * .6 + i * .5) * (22 + i * 3) + Math.sin(x * .011 - t * .9 + i) * 6 + bend;
-          x ? ctx.lineTo(x, yv) : ctx.moveTo(x, yv);
+      const scan = (t * 140) % (W + 400) - 200;
+      for (let x = GAP / 2; x < W; x += GAP) {
+        for (let y = GAP / 2; y < H; y += GAP) {
+          const dx = x - mouse.x, dy = y - mouse.y, d = Math.sqrt(dx * dx + dy * dy);
+          const m = Math.max(0, 1 - d / 190);
+          const s = Math.max(0, 1 - Math.abs(x - scan) / 90) * .5;
+          const k = Math.max(m, s);
+          const ox = m ? dx / (d + 1) * m * 10 : 0, oy = m ? dy / (d + 1) * m * 10 : 0;
+          if (k > .02) { ctx.fillStyle = `rgba(240,185,11,${.15 + k * .85})`; const z = 1.2 + k * 1.8; ctx.fillRect(x + ox - z / 2, y + oy - z / 2, z, z); }
+          else { ctx.fillStyle = 'rgba(255,255,255,.09)'; ctx.fillRect(x - .6, y - .6, 1.2, 1.2); }
         }
-        const g = ctx.createLinearGradient(0, 0, W, 0);
-        g.addColorStop(0, 'rgba(212,175,95,0)'); g.addColorStop(.5, `rgba(230,199,118,${.05 + i * .012})`); g.addColorStop(1, 'rgba(212,175,95,0)');
-        ctx.strokeStyle = g; ctx.lineWidth = 1; ctx.stroke();
       }
-      // dust
-      for (const p of parts) {
-        const dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
-        if (d2 < 16000) { const f = (16000 - d2) / 16000 * .9; p.x += dx / Math.sqrt(d2 + 1) * f * 2; p.y += dy / Math.sqrt(d2 + 1) * f * 2; }
-        p.x += p.vx; p.y += p.vy;
-        if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; }
-        if (p.x < -5) p.x = W + 5; if (p.x > W + 5) p.x = -5;
-        const tw = .6 + Math.sin(t * 2 + p.x) * .4;
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283);
-        ctx.fillStyle = `rgba(243,220,154,${p.a * tw})`; ctx.fill();
+      const n = Math.min(trace.length, Math.floor(t * 60));
+      if (n > 1) {
+        ctx.beginPath();
+        for (let i = 0; i < n; i++) i ? ctx.lineTo(i * 8, trace[i]) : ctx.moveTo(0, trace[0]);
+        ctx.strokeStyle = 'rgba(240,185,11,.55)'; ctx.lineWidth = 1.5; ctx.stroke();
+        const lx = (n - 1) * 8, ly = trace[n - 1];
+        ctx.fillStyle = '#f0b90b'; ctx.fillRect(lx - 3, ly - 3, 6, 6);
+        ctx.strokeStyle = 'rgba(240,185,11,.25)'; ctx.setLineDash([2, 4]); ctx.beginPath(); ctx.moveTo(0, ly); ctx.lineTo(W, ly); ctx.stroke(); ctx.setLineDash([]);
       }
-      t += .012;
+      if (n >= trace.length && Math.random() < .5) { trace.shift(); const v = trace[trace.length - 1] + (Math.random() - .48) * 9; trace.push(Math.max(H * .25, Math.min(H * .7, v))); }
+      t += .016;
     };
-    if (reduce) draw();
+    if (reduce) { t = 99; draw(); }
     else (function loop() { if (visible) draw(); requestAnimationFrame(loop); })();
+  }
+
+  /* ---------- NY clock ---------- */
+  const clock = $('#clock');
+  if (clock) {
+    const tick = () => { clock.textContent = new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour12: false }); };
+    tick(); setInterval(tick, 1000);
+  }
+
+  /* ---------- count-up stats ---------- */
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; cio.unobserve(e.target);
+    const el = e.target, to = +el.dataset.count, pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+    if (reduce) { el.textContent = pre + to + suf; return; }
+    const t0 = performance.now(), dur = 1400;
+    (function step(now) { const p = Math.min(1, (now - t0) / dur), v = Math.round(to * (1 - Math.pow(1 - p, 3))); el.textContent = pre + v + suf; if (p < 1) requestAnimationFrame(step); })(t0);
+  }), { threshold: .5 });
+  $$('[data-count]').forEach(c => cio.observe(c));
+
+  /* ---------- eyebrow text scramble ---------- */
+  if (!reduce) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#$%';
+    const sio = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return; sio.unobserve(e.target);
+      const el = e.target, final = el.textContent; let f = 0;
+      const id = setInterval(() => {
+        el.textContent = final.split('').map((c, i) => (c === ' ' || i < f / 2) ? c : chars[Math.floor(Math.random() * chars.length)]).join('');
+        if (++f > final.length * 2) { clearInterval(id); el.textContent = final; }
+      }, 28);
+    }), { threshold: 1 });
+    $$('.eyebrow').forEach(el => sio.observe(el));
   }
 
   /* ---------- terminal typing ---------- */
@@ -218,8 +247,8 @@
     grid.insertAdjacentHTML('beforeend', '<span></span>' + exps.map(e => `<span class="col">${e}</span>`).join(''));
     const color = v => {
       const x = Math.max(-1, Math.min(1, v / 3));
-      if (x >= 0) { const a = x; return `rgb(${Math.round(42 + (243 - 42) * a)},${Math.round(33 + (215 - 33) * a)},${Math.round(18 + (140 - 18) * a)})`; }
-      const a = -x; return `rgb(${Math.round(42 + (150 - 42) * a)},${Math.round(30 + (52 - 30) * a)},${Math.round(20 + (36 - 20) * a)})`;
+      if (x >= 0) { const a = x; return `rgb(${Math.round(26 + (240 - 26) * a)},${Math.round(26 + (185 - 26) * a)},${Math.round(26 + (11 - 26) * a)})`; }
+      const a = -x; return `rgb(${Math.round(26 + (255 - 26) * a)},${Math.round(26 + (77 - 26) * a)},${Math.round(26 + (77 - 26) * a)})`;
     };
     ks.forEach(k => {
       grid.insertAdjacentHTML('beforeend', `<span class="lbl">${k.toLocaleString()}</span>`);
@@ -256,28 +285,28 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
       const padB = 28, mid = (H - padB) / 2, bw = W / strikes.length;
       const xOf = k => (k - lo) / (hi - lo) * (W - bw) + bw / 2;
-      ctx.strokeStyle = 'rgba(212,175,95,.18)'; ctx.beginPath(); ctx.moveTo(0, mid); ctx.lineTo(W, mid); ctx.stroke();
+      ctx.strokeStyle = 'rgba(255,255,255,.12)'; ctx.beginPath(); ctx.moveTo(0, mid); ctx.lineTo(W, mid); ctx.stroke();
       let net = 0;
       strikes.forEach(k => {
         const v = gammaAt(k, shown); net += v;
         const h = v / 3.4 * (mid - 14), x = xOf(k) - bw * .32;
         const g = ctx.createLinearGradient(0, mid, 0, mid - h);
-        if (v >= 0) { g.addColorStop(0, 'rgba(138,106,43,.5)'); g.addColorStop(1, '#f3dc9a'); }
-        else { g.addColorStop(0, 'rgba(110,47,34,.5)'); g.addColorStop(1, '#c4704f'); }
+        if (v >= 0) { g.addColorStop(0, 'rgba(240,185,11,.35)'); g.addColorStop(1, '#f0b90b'); }
+        else { g.addColorStop(0, 'rgba(255,77,77,.3)'); g.addColorStop(1, '#ff4d4d'); }
         ctx.fillStyle = g; ctx.fillRect(x, Math.min(mid, mid - h), bw * .64, Math.abs(h));
-        if (k % 100 === 0) { ctx.fillStyle = '#6d665a'; ctx.font = '10px JetBrains Mono, monospace'; ctx.textAlign = 'center'; ctx.fillText(k.toLocaleString(), xOf(k), H - 8); }
+        if (k % 100 === 0) { ctx.fillStyle = '#555'; ctx.font = '10px JetBrains Mono, monospace'; ctx.textAlign = 'center'; ctx.fillText(k.toLocaleString(), xOf(k), H - 8); }
       });
       // flip line
       const fx = xOf(5880);
-      ctx.setLineDash([3, 5]); ctx.strokeStyle = 'rgba(181,101,79,.7)'; ctx.beginPath(); ctx.moveTo(fx, 10); ctx.lineTo(fx, H - padB); ctx.stroke(); ctx.setLineDash([]);
-      ctx.fillStyle = '#b5654f'; ctx.font = '10px JetBrains Mono, monospace'; ctx.textAlign = 'left'; ctx.fillText('γ FLIP', fx + 6, 20);
+      ctx.setLineDash([3, 5]); ctx.strokeStyle = 'rgba(255,77,77,.7)'; ctx.beginPath(); ctx.moveTo(fx, 10); ctx.lineTo(fx, H - padB); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = '#ff4d4d'; ctx.font = '10px JetBrains Mono, monospace'; ctx.textAlign = 'left'; ctx.fillText('γ FLIP', fx + 6, 20);
       // spot
       const sx = xOf(shown);
       const sg = ctx.createLinearGradient(sx - 40, 0, sx + 40, 0);
-      sg.addColorStop(0, 'rgba(243,220,154,0)'); sg.addColorStop(.5, 'rgba(243,220,154,.12)'); sg.addColorStop(1, 'rgba(243,220,154,0)');
+      sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(.5, 'rgba(255,255,255,.08)'); sg.addColorStop(1, 'rgba(255,255,255,0)');
       ctx.fillStyle = sg; ctx.fillRect(sx - 40, 0, 80, H - padB);
-      ctx.strokeStyle = '#f3dc9a'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(sx, 4); ctx.lineTo(sx, H - padB); ctx.stroke(); ctx.lineWidth = 1;
-      ctx.fillStyle = '#f3dc9a'; ctx.beginPath(); ctx.arc(sx, 6, 4, 0, 6.283); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(sx, 4); ctx.lineTo(sx, H - padB); ctx.stroke(); ctx.lineWidth = 1;
+      ctx.fillStyle = '#fff'; ctx.fillRect(sx - 4, 2, 8, 8);
       // stats
       const longG = shown >= 5880;
       $('#pSpot').textContent = fmt(shown);

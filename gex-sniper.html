@@ -14,30 +14,26 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="loader" id="loader" aria-hidden="true">
-    <div class="loader__mark">
-      <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="#d4af5f" stroke-width="1"/><path d="M16 2v8M16 22v8M2 16h8M22 16h8" stroke="#f3dc9a" stroke-width="1.2" stroke-linecap="round"/></svg>
-      <div class="loader__word">GEX Sniper</div>
-    </div>
+    <div class="loader__mark"><div class="loader__word">GEX Sniper — loading</div><div class="loader__bar"><i></i></div></div>
   </div>
-  <div class="grain" aria-hidden="true"></div>
   <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="cursor" aria-hidden="true"></div><div class="cursor-dot" aria-hidden="true"></div>
 
   <header class="nav" id="nav">
     <div class="container nav__inner">
       <a href="index.html" class="logo" aria-label="Prescient+ home">
-        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3 L29 16 L16 29 L3 16 Z" stroke="#d4af5f" stroke-width="1.3"/><path d="M12.5 21 V11 h4.5 a3.2 3.2 0 0 1 0 6.4 h-4.5" stroke="#f3dc9a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="1" y="1" width="22" height="22" stroke="#f0b90b" stroke-width="2"/><path d="M8 18V6h5a3.5 3.5 0 0 1 0 7H8" stroke="#f5f5f5" stroke-width="2.2" stroke-linecap="square"/></svg>
         <span>Prescient<b>+</b></span>
       </a>
       <nav class="nav__links" id="navLinks" aria-label="Main">
         <a href="index.html#edge">The Edge</a>
+        <a href="index.html#results">Results</a>
         <a href="index.html#memberships">Memberships</a>
-        <a href="index.html#mentorship">Mentorship</a>
         <a href="gex-sniper.html" class="is-active">GEX Sniper</a>
         <a href="https://discord.gg/4gqnwCjpJ" target="_blank" rel="noopener">Discord</a>
         <a href="https://gexsniper.com/" class="btn btn--gold btn--sm magnetic" target="_blank" rel="noopener">Get GEX Sniper</a>
@@ -53,7 +49,7 @@
       <div class="container gx-hero__inner">
         <div>
           <p class="eyebrow hero__fade">Options Flow Analysis</p>
-          <h1 class="hero__title"><span class="line"><span>GEX</span></span><span class="line"><span class="gold-text"><em>Sniper</em></span></span></h1>
+          <h1 class="hero__title"><span class="line"><span>GEX</span></span><span class="line"><span class="gold-text">Sniper</span></span></h1>
           <p class="hero__fade d1">See where dealers are forced to hedge before price gets there. Gamma exposure heatmaps, AI-powered insights, and real-time market data, built for traders who read the mechanics.</p>
           <div class="hero__ctas hero__fade d2 gx-ctas">
             <a href="https://gexsniper.com/" class="btn btn--gold magnetic" target="_blank" rel="noopener">Launch GEX Sniper <span class="arrow">→</span></a>
@@ -62,22 +58,22 @@
         </div>
         <div class="gx-scope hero__fade d2" aria-hidden="true" id="scope">
           <svg viewBox="0 0 500 500" fill="none">
-            <defs><radialGradient id="sg"><stop offset="0" stop-color="#d4af5f" stop-opacity=".22"/><stop offset="1" stop-color="#d4af5f" stop-opacity="0"/></radialGradient></defs>
+            <defs><radialGradient id="sg"><stop offset="0" stop-color="#f0b90b" stop-opacity=".22"/><stop offset="1" stop-color="#f0b90b" stop-opacity="0"/></radialGradient></defs>
             <circle cx="250" cy="250" r="240" fill="url(#sg)"/>
-            <g class="rot" stroke="#d4af5f" stroke-opacity=".5">
+            <g class="rot" stroke="#f0b90b" stroke-opacity=".5">
               <circle cx="250" cy="250" r="220" stroke-dasharray="2 10"/>
               <circle cx="250" cy="250" r="190" stroke-opacity=".25"/>
             </g>
-            <g class="rot2" stroke="#f3dc9a" stroke-opacity=".6">
+            <g class="rot2" stroke="#f5f5f5" stroke-opacity=".6">
               <path d="M250 70 A180 180 0 0 1 430 250" stroke-width="2"/>
               <path d="M250 430 A180 180 0 0 1 70 250" stroke-width="2"/>
             </g>
-            <circle cx="250" cy="250" r="120" stroke="#d4af5f" stroke-opacity=".4"/>
-            <circle cx="250" cy="250" r="60" stroke="#d4af5f" stroke-opacity=".7"/>
-            <path d="M250 40v120M250 340v120M40 250h120M340 250h120" stroke="#f3dc9a" stroke-width="1.2"/>
-            <g id="scopeDot"><circle cx="250" cy="250" r="6" fill="#f3dc9a"/><circle cx="250" cy="250" r="16" stroke="#f3dc9a" stroke-opacity=".6"/></g>
-            <text x="268" y="236" fill="#d4af5f" font-family="JetBrains Mono" font-size="11" letter-spacing="2">CALL WALL</text>
-            <text x="120" y="330" fill="#b5654f" font-family="JetBrains Mono" font-size="11" letter-spacing="2">PUT WALL</text>
+            <circle cx="250" cy="250" r="120" stroke="#f0b90b" stroke-opacity=".4"/>
+            <circle cx="250" cy="250" r="60" stroke="#f0b90b" stroke-opacity=".7"/>
+            <path d="M250 40v120M250 340v120M40 250h120M340 250h120" stroke="#f5f5f5" stroke-width="1.2"/>
+            <g id="scopeDot"><circle cx="250" cy="250" r="6" fill="#f5f5f5"/><circle cx="250" cy="250" r="16" stroke="#f5f5f5" stroke-opacity=".6"/></g>
+            <text x="268" y="236" fill="#f0b90b" font-family="JetBrains Mono" font-size="11" letter-spacing="2">CALL WALL</text>
+            <text x="120" y="330" fill="#ff4d4d" font-family="JetBrains Mono" font-size="11" letter-spacing="2">PUT WALL</text>
           </svg>
         </div>
       </div>
@@ -104,7 +100,7 @@
       <div class="container">
         <div class="section__head reveal">
           <p class="eyebrow">What&rsquo;s Inside</p>
-          <h2>Built for traders who<br /><em class="gold-text">read the mechanics.</em></h2>
+          <h2>Built for traders who<br /><span class="gold-text">read the mechanics.</span></h2>
         </div>
         <div class="features">
           <article class="feature reveal"><span class="feature__k">GEX</span><h3>Gamma Exposure Heatmaps</h3><p>Net dealer gamma across strikes and expiries, so you can spot walls, flips, and magnets at a glance.</p></article>
@@ -121,7 +117,7 @@
       <div class="container">
         <div class="section__head section__head--center reveal">
           <p class="eyebrow">Interactive Demo</p>
-          <h2>Move the price. <em class="gold-text">Watch the regime flip.</em></h2>
+          <h2>Move the price. <span class="gold-text">Watch the regime flip.</span></h2>
           <p class="section__sub">Drag across the chart (or use the slider) to move spot price through a sample gamma profile.</p>
         </div>
         <div class="profile reveal">
@@ -144,7 +140,7 @@
       <div class="container gex-teaser">
         <div class="gex-teaser__copy reveal">
           <p class="eyebrow">Heatmap</p>
-          <h2>Every strike.<br /><em class="gold-text">Every expiry.</em></h2>
+          <h2>Every strike.<br /><span class="gold-text">Every expiry.</span></h2>
           <p>Bright gold is where dealers hold heavy long gamma and tend to dampen moves. Deep red is short gamma, where moves can accelerate. Hover any cell to read it.</p>
         </div>
         <div class="reveal" style="--d:.15s">
@@ -162,7 +158,7 @@
       <div class="container">
         <div class="section__head reveal">
           <p class="eyebrow">How Traders Use It</p>
-          <h2>From levels to <em class="gold-text">a plan.</em></h2>
+          <h2>From levels to <span class="gold-text">a plan.</span></h2>
         </div>
         <ol class="steps3">
           <li class="reveal"><h3>Map the walls</h3><p>Find the call wall, put wall, and gamma flip before the open.</p></li>
@@ -173,10 +169,9 @@
     </section>
 
     <section class="cta">
-      <div class="cta__rings" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="container reveal">
+            <div class="container reveal">
         <p class="eyebrow">Take Aim</p>
-        <h2>Stop guessing.<br /><em class="gold-text">Start sniping levels.</em></h2>
+        <h2>Stop guessing.<br /><span class="gold-text">Start sniping levels.</span></h2>
         <p>Get gamma exposure heatmaps, AI insights, and real-time flow in one place.</p>
         <div class="hero__ctas">
           <a href="https://gexsniper.com/" class="btn btn--gold magnetic" target="_blank" rel="noopener">Get GEX Sniper <span class="arrow">→</span></a>
