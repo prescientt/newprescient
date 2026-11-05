@@ -358,3 +358,33 @@ p { margin: 0 0 1em; }
 .bg-chart { --bg-img: url("img/bg-chart.jpg"); --bg-op: .22; }
 .bg-mentor { --bg-img: url("img/bg-mentor.jpg"); --bg-op: .3; }
 .bg-gex { --bg-img: url("img/bg-gex.jpg"); --bg-op: .4; }
+
+/* ---------- GEX Sniper promo popup ---------- */
+.promo { position: fixed; inset: 0; z-index: 150; display: grid; place-items: center; padding: 16px; }
+.promo[hidden] { display: none; }
+.promo__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.72); backdrop-filter: blur(4px); opacity: 0; transition: opacity .4s var(--ease); }
+.promo__card { position: relative; width: min(100%, 760px); max-height: calc(100vh - 32px); overflow: auto; display: grid; grid-template-columns: 1fr 1.2fr; background: var(--panel); border: 1px solid var(--line-2); border-top: 2px solid var(--gold); opacity: 0; transform: translateY(24px) scale(.98); transition: opacity .45s var(--ease), transform .45s var(--ease); }
+.promo.is-open .promo__backdrop { opacity: 1; }
+.promo.is-open .promo__card { opacity: 1; transform: none; }
+.promo__media { min-height: 260px; background: linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.55)), url("img/bg-gex.jpg") center / cover no-repeat; border-right: 1px solid var(--line); }
+.promo__body { padding: 36px 32px 28px; }
+.promo__body .eyebrow { margin-bottom: 1rem; }
+.promo__title { font-size: clamp(2rem, 4.5vw, 2.8rem); letter-spacing: -.04em; margin-bottom: .35em; }
+.promo__lead { color: var(--muted); }
+.promo__list { list-style: none; margin: 0 0 1.6rem; padding: 0; font: 500 .78rem/1.5 var(--mono); }
+.promo__list li { padding: .45em 0; border-bottom: 1px solid var(--line); }
+.promo__list li::before { content: "→ "; color: var(--gold); }
+.promo__ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+.promo__skip { margin-top: 14px; background: none; border: 0; padding: 4px 0; color: var(--dim); font: 500 .7rem var(--mono); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+.promo__skip:hover { color: var(--text); }
+.promo__close { position: absolute; top: 8px; right: 8px; z-index: 1; width: 40px; height: 40px; display: grid; place-items: center; background: rgba(0,0,0,.6); border: 1px solid var(--line-2); color: var(--text); font-size: 1.4rem; line-height: 1; cursor: pointer; transition: border-color .2s, color .2s; }
+.promo__close:hover { border-color: var(--gold); color: var(--gold); }
+.promo__close:focus { outline: none; }
+.promo__close:focus-visible, .promo .btn:focus-visible, .promo__skip:focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
+@media (max-width: 680px) {
+  .promo__card { grid-template-columns: 1fr; }
+  .promo__media { min-height: 150px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .promo__body { padding: 24px 20px 20px; }
+  .promo__ctas .btn { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .promo__backdrop, .promo__card { transition: none; } }

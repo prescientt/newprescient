@@ -342,4 +342,43 @@
       }, { threshold: .5 }).observe(pc);
     }
   }
+
+  /* ---------- GEX Sniper promo popup ---------- */
+  const promo = $('#gexPromo');
+  if (promo) {
+    const KEY = 'gexPromoSeen';
+    const seen = () => { try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; } };
+    const markSeen = () => { try { localStorage.setItem(KEY, '1'); } catch (e) {} };
+    let lastFocus = null, shown = false;
+    const onDepth = () => { const max = document.body.scrollHeight - innerHeight; if (max > 0 && scrollY / max > .4) open(); };
+    const close = () => {
+      promo.classList.remove('is-open'); markSeen();
+      document.body.style.overflow = '';
+      setTimeout(() => { promo.hidden = true; }, reduce ? 0 : 450);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    };
+    function open() {
+      if (shown || seen()) return;
+      if (links.classList.contains('is-open')) return; // don't fight the mobile menu
+      shown = true; lastFocus = document.activeElement;
+      removeEventListener('scroll', onDepth);
+      promo.hidden = false; document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => requestAnimationFrame(() => promo.classList.add('is-open')));
+      $('.promo__close', promo).focus();
+    }
+    $$('[data-promo-close]', promo).forEach(b => b.addEventListener('click', close));
+    $$('[data-promo-seen]', promo).forEach(a => a.addEventListener('click', markSeen));
+    addEventListener('keydown', e => {
+      if (promo.hidden) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'Tab') { // keep focus inside the dialog
+        const f = $$('a,button', promo).filter(el => el.offsetParent);
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+    // show after 12s on the page, or once the visitor scrolls 40% down, whichever comes first; once per visitor
+    if (!seen()) { setTimeout(open, 12000); addEventListener('scroll', onDepth, { passive: true }); }
+  }
 })();
