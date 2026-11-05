@@ -19,7 +19,7 @@ All plans link directly to hosted checkouts (edit in `index.html` if they change
 - **Legacy — $125/mo (Whop):** `https://whop.com/checkout/plan_PALPck8TJu5V7/`
 - **Vanguard — $225/mo (Whop):** `https://whop.com/prescientrades/vanguard-membership/`
 - **1-on-1 Mentorship — $3,500 (Stripe):** `https://buy.stripe.com/dRmdR8awraxw7XsfFi4c80e`
-- **Discord:** `https://discord.gg/n8b2zAraX`
+- **Discord:** `https://discord.gg/4gqnwCjpJ`
 - **GEX Sniper:** `https://gexsniper.com/`
 
 ## Preview locally
